@@ -18,7 +18,7 @@ import { EvaluacionesModule } from './evaluaciones/evaluaciones.module';
       password: 'hernandez12',
       database: 'crudEmpresa',
       autoLoadEntities: true,
-      synchronize: true, 
+      synchronize: true,
     }),
     EmpleadosModule,
     DepartamentosModule,
@@ -26,6 +26,7 @@ import { EvaluacionesModule } from './evaluaciones/evaluaciones.module';
     ProyectosModule,
     EvaluacionesModule,
   ],
-
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

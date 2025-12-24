@@ -7,12 +7,16 @@ import { UpdateDepartamentoDto } from './dto/update-departamentos.dto';
 
 @Injectable()
 export class DepartamentosService {
-  constructor( @InjectRepository(Departamentos) private departamentoRepository: Repository<Departamentos>) {}
-    create(CreateDepartamentoDto: CreateDepartamentoDto) {
-    const departamentos = this.departamentoRepository.create(CreateDepartamentoDto);
+  constructor(
+    @InjectRepository(Departamentos)
+    private departamentoRepository: Repository<Departamentos>,
+  ) {}
+  create(CreateDepartamentoDto: CreateDepartamentoDto) {
+    const departamentos = this.departamentoRepository.create(
+      CreateDepartamentoDto,
+    );
     return this.departamentoRepository.save(departamentos);
-    }
-
+  }
 
   findAll() {
     return this.departamentoRepository.find();
@@ -21,24 +25,21 @@ export class DepartamentosService {
   findOne(id: number) {
     return this.departamentoRepository.findOne({ where: { id } });
   }
- 
-async update(id: number, updateDepartamentoDto: UpdateDepartamentoDto) {
-  const departamento = await this.departamentoRepository.findOne({
-    where: { id },
-  });
 
+  async update(id: number, updateDepartamentoDto: UpdateDepartamentoDto) {
+    const departamento = await this.departamentoRepository.findOne({
+      where: { id },
+    });
 
-  if (!departamento) {
-    throw new Error('Departamento no encontrado');
+    if (!departamento) {
+      throw new Error('Departamento no encontrado');
+    }
+
+    Object.assign(departamento, updateDepartamentoDto);
+    return this.departamentoRepository.save(departamento);
   }
-
-  Object.assign(departamento, updateDepartamentoDto);
-  return this.departamentoRepository.save(departamento);
-}
 
   remove(id: number) {
     return this.departamentoRepository.delete(id);
   }
 }
-
-

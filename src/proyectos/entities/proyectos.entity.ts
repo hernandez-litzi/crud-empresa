@@ -1,28 +1,35 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from "typeorm";
-import { Departamentos } from "src/departamentos/entities/departamentos.entity";
-import { Evaluaciones } from "src/evaluaciones/entities/evaluaciones.entity";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+} from 'typeorm';
+import { Departamentos } from 'src/departamentos/entities/departamentos.entity';
+import { Evaluaciones } from 'src/evaluaciones/entities/evaluaciones.entity';
 
 @Entity('proyectos')
 export class Proyectos {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    nombre: string;
+  @Column()
+  nombre: string;
 
-    @Column()
-    descripcion: string;
+  @Column()
+  descripcion: string;
 
-    @Column()
-    fechainicio: string;
+  @Column()
+  fechainicio: string;
 
-    @Column()
-    fechafinal: string;
+  @Column()
+  fechafinal: string;
 
-    @ManyToOne(() => Departamentos)
-    @JoinColumn({ name: 'idempleado' }) 
-    departamentos: Departamentos;    
+  @ManyToOne(() => Departamentos)
+  @JoinColumn({ name: 'idempleado' })
+  departamentos: Departamentos;
 
-    @OneToMany(() => Evaluaciones, (evaluaciones) => evaluaciones.proyectos)
-    evaluaciones: Evaluaciones[];  
+  @OneToMany(() => Evaluaciones, (evaluaciones) => evaluaciones.proyectos)
+  evaluaciones: Evaluaciones[];
 }

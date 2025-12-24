@@ -7,11 +7,13 @@ import { Cargo } from './entities/cargo.entity';
 
 @Injectable()
 export class CargoService {
-    constructor( @InjectRepository(Cargo) private cargoRepository: Repository<Cargo>) {}
-    create(CreateCargoDto : CreateCargoDto) {
+  constructor(
+    @InjectRepository(Cargo) private cargoRepository: Repository<Cargo>,
+  ) {}
+  create(CreateCargoDto: CreateCargoDto) {
     const cargo = this.cargoRepository.create(CreateCargoDto);
     return this.cargoRepository.save(cargo);
-    }
+  }
   findAll() {
     return this.cargoRepository.find();
   }
@@ -21,19 +23,17 @@ export class CargoService {
   }
 
   async update(id: number, UpdateCargoDto: UpdateCargoDto) {
-  const cargo = await this.cargoRepository.findOne({
-    where: { id },
-  });
+    const cargo = await this.cargoRepository.findOne({
+      where: { id },
+    });
 
+    if (!cargo) {
+      throw new Error('Cargo no encontrado');
+    }
 
-  if (!cargo) {
-    throw new Error('Cargo no encontrado');
+    Object.assign(cargo, UpdateCargoDto);
+    return this.cargoRepository.save(cargo);
   }
-
-  Object.assign(cargo, UpdateCargoDto);
-  return this.cargoRepository.save(cargo);
-}
-
 
   remove(id: number) {
     return this.cargoRepository.delete(id);

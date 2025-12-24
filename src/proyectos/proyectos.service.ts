@@ -7,11 +7,13 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class ProyectosService {
-
-  constructor( @InjectRepository(Proyectos) private proyectoRepository: Repository<Proyectos>) {}
+  constructor(
+    @InjectRepository(Proyectos)
+    private proyectoRepository: Repository<Proyectos>,
+  ) {}
   create(CreateProyectoDto: CreateProyectoDto) {
-  const proyectos = this.proyectoRepository.create(CreateProyectoDto);
-  return this.proyectoRepository.save(proyectos);
+    const proyectos = this.proyectoRepository.create(CreateProyectoDto);
+    return this.proyectoRepository.save(proyectos);
   }
 
   findAll() {
@@ -23,19 +25,17 @@ export class ProyectosService {
   }
 
   async update(id: number, UpdateProyectoDto: UpdateProyectoDto) {
-  const proyectos = await this.proyectoRepository.findOne({
-    where: { id },
-  });
+    const proyectos = await this.proyectoRepository.findOne({
+      where: { id },
+    });
 
+    if (!proyectos) {
+      throw new Error('Proyecto no encontrado');
+    }
 
-  if (!proyectos) {
-    throw new Error('Proyecto no encontrado');
+    Object.assign(proyectos, UpdateProyectoDto);
+    return this.proyectoRepository.save(proyectos);
   }
-
-  Object.assign(proyectos, UpdateProyectoDto);
-  return this.proyectoRepository.save(proyectos);
-}
-
 
   remove(id: number) {
     return this.proyectoRepository.delete(id);

@@ -7,10 +7,14 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class EvaluacionesService {
-  constructor( @InjectRepository(Evaluaciones) private evaluacionesRepository: Repository<Evaluaciones>) {}
+  constructor(
+    @InjectRepository(Evaluaciones)
+    private evaluacionesRepository: Repository<Evaluaciones>,
+  ) {}
   create(createEvaluacioneDto: CreateEvaluacioneDto) {
-  const evaluaciones = this.evaluacionesRepository.create(createEvaluacioneDto);
-  return this.evaluacionesRepository.save(evaluaciones);
+    const evaluaciones =
+      this.evaluacionesRepository.create(createEvaluacioneDto);
+    return this.evaluacionesRepository.save(evaluaciones);
   }
 
   findAll() {
@@ -21,20 +25,18 @@ export class EvaluacionesService {
     return this.evaluacionesRepository.findOne({ where: { id } });
   }
 
-
   async update(id: number, UpdateEvaluacioneDto: UpdateEvaluacioneDto) {
-  const evaluaciones = await this.evaluacionesRepository.findOne({
-    where: { id },
-  });
+    const evaluaciones = await this.evaluacionesRepository.findOne({
+      where: { id },
+    });
 
+    if (!evaluaciones) {
+      throw new Error('Proyecto no encontrado');
+    }
 
-  if (!evaluaciones) {
-    throw new Error('Proyecto no encontrado');
+    Object.assign(evaluaciones, UpdateEvaluacioneDto);
+    return this.evaluacionesRepository.save(evaluaciones);
   }
-
-  Object.assign(evaluaciones, UpdateEvaluacioneDto);
-  return this.evaluacionesRepository.save(evaluaciones);
-}
   remove(id: number) {
     return this.evaluacionesRepository.delete(id);
   }

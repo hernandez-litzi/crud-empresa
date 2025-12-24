@@ -7,10 +7,13 @@ import { UpdateEmpleadoDto } from './dto/update-empleados.dto';
 
 @Injectable()
 export class EmpleadosService {
-  constructor( @InjectRepository(Empleados) private empleadoRepository: Repository<Empleados>) {}
+  constructor(
+    @InjectRepository(Empleados)
+    private empleadoRepository: Repository<Empleados>,
+  ) {}
   create(createEmpleadoDto: CreateEmpleadoDto) {
-  const empleados = this.empleadoRepository.create(createEmpleadoDto);
-  return this.empleadoRepository.save(empleados);
+    const empleados = this.empleadoRepository.create(createEmpleadoDto);
+    return this.empleadoRepository.save(empleados);
   }
 
   findAll() {
@@ -22,21 +25,19 @@ export class EmpleadosService {
   }
 
   async update(id: number, UpdateEmpleadoDto: UpdateEmpleadoDto) {
-  const empleados = await this.empleadoRepository.findOne({
-    where: { id },
-  });
+    const empleados = await this.empleadoRepository.findOne({
+      where: { id },
+    });
 
+    if (!empleados) {
+      throw new Error('Empleado no encontrado');
+    }
 
-  if (!empleados) {
-    throw new Error('Empleado no encontrado');
+    Object.assign(empleados, UpdateEmpleadoDto);
+    return this.empleadoRepository.save(empleados);
   }
-
-  Object.assign(empleados, UpdateEmpleadoDto);
-  return this.empleadoRepository.save(empleados);
-}
 
   remove(id: number) {
     return this.empleadoRepository.delete(id);
   }
 }
-
