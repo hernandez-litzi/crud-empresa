@@ -16,9 +16,12 @@ export class Evaluaciones {
   calificaciones: number;
 
   @Column()
-  fecha: number;
+  fecha: string;
+
+  @Column()
+  observaciones: string;
 
   @ManyToOne(() => Proyectos)
   @JoinColumn({ name: 'idproyecto' })
-  proyectos: Proyectos;
+  proyecto: Proyectos;
 }

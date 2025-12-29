@@ -1,23 +1,23 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
-import { Departamentos } from "../../departamentos/entities/departamentos.entity";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import { Departamentos } from '../../departamentos/entities/departamentos.entity';
 
 @Entity('empleados')
 export class Empleados {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    nombre: string;
+  @Column()
+  nombre: string;
 
-    @Column()
-    apellidos: string;
+  @Column()
+  apellidos: string;
 
-    @Column()
-    telefono: string;
+  @Column()
+  telefono: string;
 
-    @Column()
-    correo: string;
+  @Column()
+  correo: string;
 
-    @OneToOne(() => Departamentos, (departamento) => departamento.empleado)
-    departamento: Departamentos;
+  @OneToOne(() => Departamentos, (departamento) => departamento.empleado)
+  departamento: Departamentos;
 }

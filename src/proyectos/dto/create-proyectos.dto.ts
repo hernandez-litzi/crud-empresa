@@ -1,4 +1,4 @@
-import { IsString, IsNumber } from 'class-validator';
+import { IsString } from 'class-validator';
 export class CreateProyectoDto {
   @IsString()
   nombre: string;
@@ -6,9 +6,9 @@ export class CreateProyectoDto {
   @IsString()
   descripcion: string;
 
-  @IsNumber()
-  fechainicio: string;
+  @IsString()
+  fechaInicio: string;
 
-  @IsNumber()
-  fechafinal: string;
+  @IsString()
+  fechaFinal: string;
 }

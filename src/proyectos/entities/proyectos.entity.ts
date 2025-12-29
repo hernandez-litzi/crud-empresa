@@ -21,15 +21,15 @@ export class Proyectos {
   descripcion: string;
 
   @Column()
-  fechainicio: string;
+  fechaInicio: string;
 
   @Column()
-  fechafinal: string;
+  fechaFinal: string;
 
   @ManyToOne(() => Departamentos)
-  @JoinColumn({ name: 'idempleado' })
-  departamentos: Departamentos;
+  @JoinColumn({ name: 'iddepartamento' })
+  departamento: Departamentos;
 
-  @OneToMany(() => Evaluaciones, (evaluaciones) => evaluaciones.proyectos)
-  evaluaciones: Evaluaciones[];
+  @OneToMany(() => Evaluaciones, (evaluaciones) => evaluaciones.proyecto)
+  evaluacion: Evaluaciones[];
 }

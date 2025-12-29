@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   Controller,
   Get,
@@ -17,7 +18,11 @@ export class EmpleadosController {
 
   @Post()
   create(@Body() createEmpleadoDto: CreateEmpleadoDto) {
-    return this.empleadosService.create(createEmpleadoDto);
+    const empleado = this.empleadosService.create(createEmpleadoDto);
+    return {
+    message:'Usuario creado con exito', empleado 
+    };
+  
   }
 
   @Get()

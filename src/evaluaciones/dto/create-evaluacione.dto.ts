@@ -1,8 +1,11 @@
-import { IsNumber } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 export class CreateEvaluacioneDto {
   @IsNumber()
   calificaciones: number;
 
-  @IsNumber()
-  fecha: number;
+  @IsString()
+  fecha: string;
+
+  @IsString()
+  observaciones: string;
 }

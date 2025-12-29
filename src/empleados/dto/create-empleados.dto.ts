@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsEmail } from 'class-validator';
+import { IsString, IsEmail } from 'class-validator';
 
 export class CreateEmpleadoDto {
   @IsString()
@@ -7,7 +7,7 @@ export class CreateEmpleadoDto {
   @IsString()
   apellido: string;
 
-  @IsNumber()
+  @IsString()
   telefono: string;
 
   @IsEmail()
