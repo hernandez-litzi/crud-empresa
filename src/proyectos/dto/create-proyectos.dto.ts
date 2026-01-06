@@ -7,8 +7,8 @@ export class CreateProyectoDto {
   descripcion: string;
 
   @IsString()
-  fechaInicio: string;
+  fechainicio: string;
 
   @IsString()
-  fechaFinal: string;
+  fechafinal: string;
 }
