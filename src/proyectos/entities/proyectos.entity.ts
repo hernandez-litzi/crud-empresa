@@ -21,10 +21,10 @@ export class Proyectos {
   descripcion: string;
 
   @Column()
-  fechaInicio: string;
+  fechainicio: string;
 
   @Column()
-  fechaFinal: string;
+  fechafinal: string;
 
   @ManyToOne(() => Departamentos)
   @JoinColumn({ name: 'iddepartamento' })
